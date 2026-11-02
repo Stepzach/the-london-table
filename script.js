@@ -61,11 +61,11 @@ tags: ['japanese', 'date-night'],
         alt: 'Restaurant exterior or interior'
       },
       {
-        url: 'https://ik.imagekit.io/53bnrahwc/19894BF2-5AA3-420E-B196-47CFCFBD819F_4_5005_c.jpeg',
+        url: 'https://ik.imagekit.io/53bnrahwc/IMG_8092.jpg',
         alt: 'Food ordered at the restaurant'
       },
       {
-        url: 'https://ik.imagekit.io/53bnrahwc/C9782AC3-9343-4A32-BBE7-53E82AA9260F_4_5005_c.jpeg',
+        url: 'https://ik.imagekit.io/53bnrahwc/IMG_8086.jpg',
         alt: 'The Menu'
       }
      

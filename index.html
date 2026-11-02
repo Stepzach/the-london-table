@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#faf9f6" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="The London Table — London Restaurant Reviews" />
+  <meta property="og:description" content="Honest reviews, hidden gems and good food across London." />
+  <meta name="description" content="The London Table — independent restaurant finds, honest ratings and neighbourhood favourites around London." />
+  <title>The London Table — A little taste of London</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="firebase-config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3V10Z"/><path d="M9 20v-7h6v7"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.7a5.6 5.6 0 0 0-7.9 0L12 5.6l-.9-.9a5.6 5.6 0 0 0-7.9 7.9L12 21l8.8-8.4a5.6 5.6 0 0 0 0-7.9Z"/></symbol>
+    <symbol id="i-comment" viewBox="0 0 24 24"><path d="M21 11.5a8.7 8.7 0 0 1-8.7 8.7 9 9 0 0 1-4-.9L3 21l1.7-5.2A8.7 8.7 0 1 1 21 11.5Z"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M5 3h14v18l-7-5-7 5V3Z"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4L22 2ZM11 13 22 2"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3V7Z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 4h7v7M20 4l-9 9"/><path d="M20 14v6H4V4h6"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="17" rx="4"/><path d="M5 11h14M8 22l2-3m6 0 2 3M9 15h.01M15 15h.01"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v11a3 3 0 0 0 3 3h11"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 2c0 6-4 10-10 10 6 0 10 4 10 10 0-6 4-10 10-10-6 0-10-4-10-10Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  </svg>
+
+  <aside class="sidebar" aria-label="Main navigation">
+    <a class="brand" href="#" aria-label="The London Table home"><span class="brand-mark">✳</span><span>the london<span class="brand-second">table<span class="brand-period">.</span></span></span></a>
+    
+    <nav class="side-links" aria-label="Discover">
+      <button class="side-link is-active" type="button" data-nav="posts"><svg><use href="#i-home"/></svg><span>Home</span></button>
+     
+      <button class="side-link" type="button" data-nav="saved"><svg><use href="#i-bookmark"/></svg><span>Saved places</span></button>
+      
+    </nav>
+    <div class="sidebar-bottom"><p>Hey! Thanks for visiting.<br />Have a restaurant worthy of this guide? Tell me about it: zachstep05@gmail.com</p><small>Zachary Stephens</small></div>
+  </aside>
+
+  
+
+  <main class="page" id="top">
+    <div class="page-inner">
+     
+      <section class="profile" id="profile" aria-label="Guide profile">
+        <div class="profile-intro">
+          <div class="profile-avatar" aria-hidden="true"><span class="avatar-ring"><span class="avatar-plate">✳</span><img class="profile-avatar-image" data-profile-avatar alt="" hidden /></span></div>
+          <div class="profile-heading">
+            <div class="handle-line"><h1>London Restaurants</h1><span class="editorial-badge" title="Independent London food guide"><svg><use href="#i-check"/></svg></span></div>
+            <div class="profile-name">by Zachary Stephens</div>
+            
+          </div>
+        </div>
+        <div class="profile-body">
+          <div class="profile-stats"><div><strong id="stat-posts">0</strong><span>posts</span></div><div><strong id="stat-likes" aria-live="polite">0</strong><span>likes</span></div></div>
+          <div class="profile-bio"><p class="bio-headline">Eating my way through London. <span>🍴</span></p><p>Honest reviews, hidden gems &amp; very good lunches.<br />Good food. No gatekeeping. Just the places worth knowing.</p></div>
+          <div class="bio-link-row"><span class="small-link-icon"><svg><use href="#i-external"/></svg></span><a id="featured-website" href="https://stephenszachary.com/" target="_blank" rel="noopener noreferrer">https://stephenszachary.com/</a></div>
+        </div>
+      </section>
+
+      
+
+      <section class="explore-section" aria-label="Explore categories"><div class="section-header"><span class="eyebrow">Highlights</span></div><div class="highlights" id="highlights"></div></section>
+      <section class="feed" id="feed" aria-label="Restaurant posts">
+        <div class="feed-heading"><div><span class="eyebrow">Restaurant reviews</span><h2>Posts<span>.</span></h2></div><span class="feed-count" id="feed-count">0 posts</span></div>
+        <div class="feed-tabs" role="tablist" aria-label="Photo grid sections"><button class="feed-tab is-active" id="tab-posts" data-tab="posts" role="tab" aria-selected="true"><svg><use href="#i-grid"/></svg> POSTS</button><button class="feed-tab" id="tab-saved" data-tab="saved" role="tab" aria-selected="false"><svg><use href="#i-bookmark"/></svg> SAVED</button></div>
+        <div class="active-filter" id="active-filter" hidden></div>
+        <div class="post-grid" id="post-grid" role="tabpanel" aria-label="Restaurant reviews"></div>
+      </section>
+      <footer class="site-footer"><span>the london table<span class="brand-period">.</span></span><p>Problem with the Website? Contact me! zachstep05@gmail.com</p><a href="#top">TOP ↑</a></footer>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation"><button type="button" class="bottom-nav-item is-active" data-nav="posts" aria-label="Home"><svg><use href="#i-home"/></svg><span>Home</span></button><button type="button" class="bottom-nav-item" data-nav="saved" aria-label="Saved"><svg><use href="#i-bookmark"/></svg><span>Saved</span></button></nav>
+
+  <dialog class="post-dialog" id="post-dialog" aria-label="Restaurant review" aria-modal="true"><div class="post-overlay" id="post-overlay"><button class="dialog-close" type="button" id="close-post" aria-label="Close restaurant review"><svg><use href="#i-x"/></svg></button><button class="outside-arrow outside-prev" type="button" id="previous-post" aria-label="Previous restaurant"><svg><use href="#i-chevron-left"/></svg></button><article class="post-card"><div class="post-media" id="post-media"><div class="post-image-slot" id="post-image-slot"></div><span class="media-type" id="media-type">RESTAURANT</span><span class="media-counter" id="photo-counter">1 / 3</span><button class="media-arrow media-previous" type="button" id="previous-photo" aria-label="Previous image"><svg><use href="#i-chevron-left"/></svg></button><button class="media-arrow media-next" type="button" id="next-photo" aria-label="Next image"><svg><use href="#i-chevron-right"/></svg></button><div class="carousel-dots" id="carousel-dots" aria-label="Image carousel pages"></div></div><div class="post-details"><header class="post-author"><div class="author-avatar"><span class="author-avatar-fallback" aria-hidden="true">✳</span><img class="author-avatar-image" data-profile-avatar alt="" hidden /></div><div class="author-name"><strong>the.london.table</strong><span id="post-author-location">London, UK</span></div></header><div class="post-scroll" id="post-scroll"><div class="post-caption" id="post-caption"></div><section class="comments-section" id="comments-section" aria-label="Comments"><div class="comments-heading"><h3>Comments <span id="comments-title-count">(0)</span></h3></div><div class="comments-list" id="comments-list"><p class="comments-empty">Be the first to leave a note.</p></div></section></div><footer class="post-footer"><div class="post-actions"><button class="action-button" id="like-button" type="button" aria-label="Like this restaurant" aria-pressed="false"><svg><use href="#i-heart"/></svg></button><button class="action-button" id="comment-button" type="button" aria-label="Write a comment"><svg><use href="#i-comment"/></svg></button><button class="action-button" id="share-button" type="button" aria-label="Share restaurant"><svg><use href="#i-share"/></svg></button><div class="footer-dots" aria-hidden="true">● <span>●</span> ●</div><button class="action-button save-button" id="save-button" type="button" aria-label="Save restaurant" aria-pressed="false"><svg><use href="#i-bookmark"/></svg></button></div><div class="engagement-summary"><strong id="likes-count">0 likes</strong><span id="comments-count">0 comments</span></div><span class="post-date" id="post-date"></span><form id="comment-form" class="comment-form"><label class="sr-only" for="comment-name">Your name</label><input id="comment-name" autocomplete="nickname" maxlength="30" placeholder="Name" required/><label class="sr-only" for="comment-input">Your comment</label><input id="comment-input" maxlength="500" placeholder="Add a comment..." required/><button type="submit" id="submit-comment">Post</button></form><div class="social-status" id="social-status" role="status" aria-live="polite"></div></footer></div></article><button class="outside-arrow outside-next" type="button" id="next-post" aria-label="Next restaurant"><svg><use href="#i-chevron-right"/></svg></button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="no-script">Please enable JavaScript to explore the restaurant guide.</p></noscript>
+</body>
+</html>

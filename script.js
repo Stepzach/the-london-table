@@ -1,8 +1,81 @@
 /* THE LONDON TABLE — published restaurant reviews. See README for adding a real review. */
 const CONTENT = {
- profile:{username:'the.london.table',displayName:'The London Table',avatarUrl:'https://avatars.githubusercontent.com/u/114777610?v=4'},
- highlights:[{id:'all',name:'All spots',icon:'✳',color:'#f4e6d8'},{id:'italian',name:'Italian',icon:'🍝',color:'#e9e6d9'},{id:'brunch',name:'Brunch',icon:'☕',color:'#eee1cd'},{id:'asian',name:'Asian',icon:'🍜',color:'#e9dfd8'},{id:'date-night',name:'Date night',icon:'♡',color:'#f0ddda'},{id:'budget',name:'Under £20',icon:'£',color:'#e0e9de'}],
- posts:[]
+ profile:{username:'zachary.stephens',displayName:'London Restaurants',avatarUrl:'https://avatars.githubusercontent.com/u/114777610?v=4'},
+ highlights:[{id:'all',name:'All spots',icon:'✳',color:'#f4e6d8'},
+             
+             
+             {
+  id: 'mexican',
+  name: 'Mexican',
+  icon: '🌮',
+  color: '#f4e6d8'
+},
+{
+  id: 'japanese',
+  name: 'Japanese',
+  icon: '🍣',
+  color: '#e9e6d9'
+},
+             
+             {id:'italian',name:'Italian',icon:'🍝',color:'#e9e6d9'},{id:'brunch',name:'Brunch',icon:'☕',color:'#eee1cd'},{id:'asian',name:'Asian',icon:'🍜',color:'#e9dfd8'},{id:'date-night',name:'Date night',icon:'♡',color:'#f0ddda'},{id:'budget',name:'Under £20',icon:'£',color:'#e0e9de'}],
+
+posts: [
+  {
+    id: 'restaurant-001',
+
+    // RESTAURANT INFORMATION
+    name: 'Los Mochis',
+    foodType: 'Mexican-Japanese',
+    priceRange: '££',
+    location: 'Notting Hill, London',
+    nearestTube: 'Notting Hill Gate',
+
+    // YOUR REVIEW
+    rating: 4.7,
+    description: `Mexican-Japanese Fusion Restaurant in Notting hill. 
+    
+    (Un)arguably the two best cuisines combined, its difficult to get this wrong. 
+    
+    High quality food with attention to detail. Nice intimate atmosphere but with slightly questionable decoration, still a great date spot. 
+    
+    Not cheap, but for the quality it’s totally justified. 
+`,
+
+    // CATEGORY & HIGHLIGHTS
+    category: 'mexican',
+tags: ['japanese', 'date-night'],
+
+    // POST DATE (YYYY-MM-DD)
+    date: '2026-25-10',
+
+    // RESTAURANT WEBSITE
+    websiteUrl: 'https://www.losmochis.co.uk/home',
+
+    // GOOGLE MAPS IFRAME SOURCE
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.255593982353!2d-0.19969552337986812!3d51.50852667181395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760f5b2b3c6ff7%3A0xe74911fd4ec778c3!2sLos%20Mochis%20Notting%20Hill!5e0!3m2!1sen!2suk!4v1793629768503!5m2!1sen!2suk',
+
+    // IMAGE CAROUSEL (3 IMAGES)
+    images: [
+      {
+        url: 'https://ik.imagekit.io/53bnrahwc/22_Mar_Los_Mochis_HR_+106.jpg',
+        alt: 'Restaurant exterior or interior'
+      },
+      {
+        url: 'https://ik.imagekit.io/53bnrahwc/19894BF2-5AA3-420E-B196-47CFCFBD819F_4_5005_c.jpeg',
+        alt: 'Food ordered at the restaurant'
+      },
+      {
+        url: 'https://ik.imagekit.io/53bnrahwc/C9782AC3-9343-4A32-BBE7-53E82AA9260F_4_5005_c.jpeg',
+        alt: 'The Menu'
+      },
+      {
+        url: 'https://ik.imagekit.io/53bnrahwc/IMG_8227.jpg',
+        alt: 'Receipt showing the total price'
+      }
+    ]
+  }
+]
+
 };
 
 (() => {

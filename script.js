@@ -100,7 +100,7 @@ tags: ['japanese', 'date-night'],
   let currentLikes = [];
   let currentComments = [];
   let service = null;
-  let serviceMode = 'connecting';
+  let serviceMode = 'unconfigured';
   let unsubscribe = () => {};
   let lastFocused = null;
   let busyLike = false;
@@ -291,7 +291,7 @@ tags: ['japanese', 'date-night'],
     const mapFrame = make('div','post-map-frame'); const map = make('iframe');map.loading='lazy';map.title=`Map of ${post.location}`;map.referrerPolicy='no-referrer-when-downgrade';map.src=mapEmbed(post);mapFrame.append(map);caption.append(mapFrame);
     $('post-scroll').scrollTop = 0;
     currentLikes = []; currentComments = []; updateSocial();
-    $('social-status').textContent = serviceMode==='unconfigured'?'Firebase configuration is missing from this deployment. Check the four GitHub Actions secrets and redeploy.':serviceMode==='firebase'?'Loading live reactions…':serviceMode==='error'?'Firebase could not connect. Check the connection details.':'Connecting to Firebase…';
+    $('social-status').textContent = serviceMode==='unconfigured'?'Likes and comments will be available once Firebase is connected.':serviceMode==='firebase'?'Loading live reactions…':'Connecting reactions…';
     renderPhoto();
   }
   function renderPhoto() {
@@ -356,7 +356,7 @@ tags: ['japanese', 'date-night'],
   async function connectFirebase() {
     const config=window.FIREBASE_CONFIG;
     const configured=config && !String(config.apiKey||'').includes('PASTE_') && !String(config.projectId||'').includes('PASTE_') && !!config.apiKey && !!config.projectId && !!config.appId;
-    if(!configured){serviceMode='unconfigured';updateProfileStats();updateSocial();if($('post-dialog').open)$('social-status').textContent='Firebase configuration is missing from this deployment. Check the four GitHub Actions secrets and redeploy.';return;}
+    if(!configured){serviceMode='unconfigured';updateProfileStats();updateSocial();return;}
     try{
       // Pinned modular Firebase SDK. Uses free Spark-plan Auth + Firestore; no backend required.
       const [appSDK,authSDK,dbSDK]=await Promise.all([
@@ -393,7 +393,7 @@ tags: ['japanese', 'date-night'],
       serviceMode='firebase';subscribeCurrent();refreshLikeTotals();
     }catch(error){
       serviceMode='error';updateProfileStats();updateSocial();console.error('Firebase could not connect:',error);
-      const code=error?.code||'unknown';\n      const hint=code==='auth/unauthorized-domain'?'Add stepzach.github.io to Firebase Authentication → Settings → Authorized domains.':code==='auth/operation-not-allowed'?'Enable Anonymous sign-in in Firebase Authentication.':code==='permission-denied'?'Publish the Firestore rules from this repository.':'Check the browser console and confirm the Firebase web app configuration and network access.';\n      $('social-status').textContent=`Firebase connection failed (${code}). ${hint}`;
+      $('social-status').textContent='Firebase is not connected. Check config, Anonymous Authentication and Firestore rules.';
       toast('Firebase connection needs attention. See README.md');
     }
   }

@@ -7,7 +7,7 @@
   --paper: #faf9f6;
   --cream: #f5f2ec;
   --soft: #f1ede5;
-  --orange: #de6c40;
+  --orange: #3a86b6;
   --sidebar: 238px;
   --max: 1010px;
 }
@@ -297,7 +297,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .editorial-badge {
   display: grid;
   place-items: center;
-  background: #cf754b;
+  background: #3a86b6;
   width: 17px;
   height: 17px;
   border-radius: 50%;

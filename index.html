@@ -13,9 +13,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
   <script src="firebase-config.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="map.js" defer></script>
 </head>
 <body>
   <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -46,6 +52,7 @@
       <button class="side-link is-active" type="button" data-nav="posts"><svg><use href="#i-home"/></svg><span>Home</span></button>
      
       <button class="side-link" type="button" data-nav="saved"><svg><use href="#i-bookmark"/></svg><span>Saved places</span></button>
+      <button class="side-link" type="button" data-map-nav aria-pressed="false"><svg><use href="#i-pin"/></svg><span>Map</span></button>
       
     </nav>
     <div class="sidebar-bottom"><p>Hey! Thanks for visiting.<br />Have a restaurant worthy of this guide? Tell me about it: <u>zachstep05@gmail.com</u></p><small>Zachary Stephens</small></div>
@@ -75,6 +82,48 @@
       
 
       <section class="explore-section" aria-label="Explore categories"><div class="section-header"><span class="eyebrow">Highlights</span></div><div class="highlights" id="highlights"></div></section>
+      <section class="map-section" id="map-section" aria-labelledby="map-heading" hidden>
+        <div class="map-page-heading">
+          <div class="map-heading-copy">
+            <span class="eyebrow">Explore London</span>
+            <h2 id="map-heading">London, on the map<span>.</span></h2>
+            <p>Every restaurant in the guide, in one place. Find a neighbourhood, follow a pin, and open the full review.</p>
+          </div>
+          <div class="map-summary" aria-live="polite">
+            <strong id="map-results">0 restaurants</strong>
+            <span id="map-total">0 of 0 with map pins</span>
+          </div>
+        </div>
+        <div class="map-toolbar">
+          <label class="map-search">
+            <svg aria-hidden="true"><use href="#i-search"/></svg>
+            <span class="sr-only">Search restaurants and neighbourhoods</span>
+            <input id="map-search" type="search" placeholder="Search restaurants or neighbourhoods..." autocomplete="off" />
+          </label>
+          <div class="map-filters" id="map-filters" role="group" aria-label="Filter restaurants by cuisine"></div>
+        </div>
+        <div class="map-shell">
+          <div class="restaurant-map" id="restaurant-map" role="application" aria-label="Interactive map of London restaurants"></div>
+          <button class="map-fit-button" id="map-fit" type="button">
+            <svg aria-hidden="true"><use href="#i-pin"/></svg>
+            <span>Show all pins</span>
+          </button>
+          <div class="map-map-hint"><span class="map-hint-dot"></span> Select a pin to open its restaurant review</div>
+          <div class="map-empty" id="map-empty" hidden>
+            <div class="map-empty-card">
+              <span class="map-empty-mark" aria-hidden="true">✳</span>
+              <strong id="map-empty-title">No restaurants mapped yet</strong>
+              <p id="map-empty-copy">Published restaurants will appear here automatically.</p>
+              <button id="map-clear-search" type="button" hidden>Clear filters</button>
+            </div>
+          </div>
+          <div class="map-unavailable" id="map-unavailable" hidden>
+            <strong>Map unavailable</strong>
+            <p>The map library could not load. Please check your connection and refresh the page.</p>
+          </div>
+        </div>
+        <p class="map-note" id="map-note" hidden></p>
+      </section>
       <section class="feed" id="feed" aria-label="Restaurant posts">
         <div class="feed-heading"><div><span class="eyebrow">Restaurant reviews</span><h2>Posts<span>.</span></h2></div><span class="feed-count" id="feed-count">0 posts</span></div>
         <div class="feed-tabs" role="tablist" aria-label="Photo grid sections"><button class="feed-tab is-active" id="tab-posts" data-tab="posts" role="tab" aria-selected="true"><svg><use href="#i-grid"/></svg> POSTS</button><button class="feed-tab" id="tab-saved" data-tab="saved" role="tab" aria-selected="false"><svg><use href="#i-bookmark"/></svg> SAVED</button></div>
@@ -85,7 +134,7 @@
     </div>
   </main>
 
-  <nav class="bottom-nav" aria-label="Mobile navigation"><button type="button" class="bottom-nav-item is-active" data-nav="posts" aria-label="Home"><svg><use href="#i-home"/></svg><span>Home</span></button><button type="button" class="bottom-nav-item" data-nav="saved" aria-label="Saved"><svg><use href="#i-bookmark"/></svg><span>Saved</span></button></nav>
+  <nav class="bottom-nav" aria-label="Mobile navigation"><button type="button" class="bottom-nav-item is-active" data-nav="posts" aria-label="Home"><svg><use href="#i-home"/></svg><span>Home</span></button><button type="button" class="bottom-nav-item" data-nav="saved" aria-label="Saved"><svg><use href="#i-bookmark"/></svg><span>Saved</span></button><button type="button" class="bottom-nav-item" data-map-nav aria-label="Map" aria-pressed="false"><svg><use href="#i-pin"/></svg><span>Map</span></button></nav>
 
   <dialog class="post-dialog" id="post-dialog" aria-label="Restaurant review" aria-modal="true"><div class="post-overlay" id="post-overlay"><button class="dialog-close" type="button" id="close-post" aria-label="Close restaurant review"><svg><use href="#i-x"/></svg></button><button class="outside-arrow outside-prev" type="button" id="previous-post" aria-label="Previous restaurant"><svg><use href="#i-chevron-left"/></svg></button><article class="post-card"><div class="post-media" id="post-media"><div class="post-image-slot" id="post-image-slot"></div><span class="media-type" id="media-type">RESTAURANT</span><span class="media-counter" id="photo-counter">1 / 3</span><button class="media-arrow media-previous" type="button" id="previous-photo" aria-label="Previous image"><svg><use href="#i-chevron-left"/></svg></button><button class="media-arrow media-next" type="button" id="next-photo" aria-label="Next image"><svg><use href="#i-chevron-right"/></svg></button><div class="carousel-dots" id="carousel-dots" aria-label="Image carousel pages"></div></div><div class="post-details"><header class="post-author"><div class="author-avatar"><span class="author-avatar-fallback" aria-hidden="true">✳</span><img class="author-avatar-image" data-profile-avatar alt="" hidden /></div><div class="author-name"><strong>Zachary Stephens</strong><span id="post-author-location">London, UK</span></div></header><div class="post-scroll" id="post-scroll"><div class="post-caption" id="post-caption"></div><section class="comments-section" id="comments-section" aria-label="Comments"><div class="comments-heading"><h3>Comments <span id="comments-title-count">(0)</span></h3></div><div class="comments-list" id="comments-list"><p class="comments-empty">Be the first to leave a note.</p></div></section></div><footer class="post-footer"><div class="post-actions"><button class="action-button" id="like-button" type="button" aria-label="Like this restaurant" aria-pressed="false"><svg><use href="#i-heart"/></svg></button><button class="action-button" id="comment-button" type="button" aria-label="Write a comment"><svg><use href="#i-comment"/></svg></button><button class="action-button" id="share-button" type="button" aria-label="Share restaurant"><svg><use href="#i-share"/></svg></button><button class="action-button save-button" id="save-button" type="button" aria-label="Save restaurant" aria-pressed="false"><svg><use href="#i-bookmark"/></svg></button></div><div class="engagement-summary"><strong id="likes-count">0 likes</strong><span id="comments-count">0 comments</span></div><span class="post-date" id="post-date"></span><form id="comment-form" class="comment-form"><label class="sr-only" for="comment-name">Your name</label><input id="comment-name" autocomplete="nickname" maxlength="30" placeholder="Name" required/><label class="sr-only" for="comment-input">Your comment</label><input id="comment-input" maxlength="500" placeholder="Add a comment..." required/><button type="submit" id="submit-comment">Post</button></form><div class="social-status" id="social-status" role="status" aria-live="polite"></div></footer></div></article><button class="outside-arrow outside-next" type="button" id="next-post" aria-label="Next restaurant"><svg><use href="#i-chevron-right"/></svg></button></div></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

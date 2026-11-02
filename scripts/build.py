@@ -10,7 +10,7 @@ if count not in (0,len(fields)):
     raise SystemExit('Incomplete Firebase configuration: add all four repository secrets')
 if dist.exists(): shutil.rmtree(dist)
 dist.mkdir()
-for name in ('index.html','style.css','script.js','favicon.svg'):
+for name in ('index.html','style.css','script.js','map.js','favicon.svg'):
     shutil.copy2(root/name,dist/name)
 (dist/'.nojekyll').write_text('')
 (dist/'firebase-config.js').write_text('/* Firebase browser config is public. Never use service account keys here. */\nwindow.FIREBASE_CONFIG = '+json.dumps(config if count else None)+';\n')

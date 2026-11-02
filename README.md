@@ -25,9 +25,9 @@ In this repository open **Settings → Secrets and variables → Actions → New
 | `FIREBASE_PROJECT_ID` | `projectId` |
 | `FIREBASE_APP_ID` | `appId` |
 
-After adding or changing secrets, **Actions → Deploy website to GitHub Pages → Run workflow**, or push a new commit to `main`. The build adds a unique version to the CSS, JavaScript and generated Firebase config URLs on every commit to prevent stale browser/CDN assets.
+After adding secrets, **Actions → Deploy website to GitHub Pages → Run workflow**, or push a new commit to `main`.
 
-**Important:** These four values are *Firebase web app configuration*, not service account credentials; they are publicly visible in the deployed JavaScript by design. Never add admin credentials or private service-account JSON to this site. Access control relies on `firestore.rules`. The production build requires all four values and fails rather than deploying a site with Firebase silently disabled. Until Firebase is connected, no real likes or comments are recorded; there is **no fake local demo fallback**.
+**Important:** These four values are *Firebase web app configuration*, not service account credentials; they are publicly visible in the deployed JavaScript by design. Never add admin credentials or private service-account JSON to this site. Access control relies on `firestore.rules`. The build refuses partially configured values and creates a valid, inert config when none are set. Until Firebase is connected, no real likes or comments are recorded; there is **no fake local demo fallback**.
 
 If you use an API key restricted by HTTP referrer, include your deployed origin. Free-tier quotas apply, and anonymous authentication does not prevent spam by a motivated attacker. Monitor traffic/usage and consider App Check and moderation before broad promotion.
 

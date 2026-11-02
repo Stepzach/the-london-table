@@ -75,6 +75,9 @@ tags: ['japanese', 'date-night'],
 
 };
 
+// Shared, read-only restaurant data for the independent map view.
+window.LONDON_TABLE_CONTENT = CONTENT;
+
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
@@ -480,6 +483,13 @@ tags: ['japanese', 'date-night'],
   window.addEventListener('visibilitychange', () => {
     if (!document.hidden && Date.now() - lastRefreshAt > 15000) refreshLikeTotals();
   });
+  // Map markers open the same full-screen review dialog used by the post grid.
+  document.addEventListener('london-table:open-post', (event) => {
+    const postId = event.detail?.postId;
+    const index = postList.findIndex(post => post.id === postId);
+    if (index >= 0) openPost(index);
+  });
+
   renderProfileAvatars();renderAll();
   if(postList.length)connectFirebase();
   const directLink=location.hash.match(/^#post\/(.+)$/);

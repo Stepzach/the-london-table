@@ -49,6 +49,7 @@ Open `script.js` → `CONTENT.posts` (currently `[]`). Add a real review object 
   description: 'Your actual review goes here.',
   date: '2026-11-02',
   websiteUrl: 'https://restaurant.example',
+  coordinates: { lat: 51.5136, lng: -0.1365 }, // optional; use the restaurant's real pin
   mapEmbedUrl: 'https://www.google.com/maps/embed?pb=...',
   images: [
     { url: 'https://your-image-host/restaurant.jpg', alt: 'Restaurant interior' },
@@ -61,6 +62,14 @@ Open `script.js` → `CONTENT.posts` (currently `[]`). Add a real review object 
 Use your **real** restaurant details and real photo URLs before committing. The first image is the grid cover; the remaining two appear in the carousel. `mapEmbedUrl` is the iframe `src` copied from Google Maps → Share → Embed a map. Any missing photos show a neutral unavailable state, not invented sample imagery.
 
 **Do not reuse or change an existing post `id`** after visitors have liked or commented. Firestore interactions are stored under `/posts/{postId}/likes/{uid}` and `/posts/{postId}/comments/{commentId}`. Removing a post from `CONTENT.posts` immediately removes it from the grid and its likes from the displayed profile total; it does not automatically delete its Firestore subcollections. If necessary, delete orphaned data separately in Firebase Console.
+
+## Restaurant map
+
+The third navigation section is an interactive London map powered by the same `CONTENT.posts` array as the feed. There is no second restaurant list to maintain: a newly published post appears on the map automatically after the updated site is deployed.
+
+The map reads coordinates from `coordinates: { lat, lng }` (or `latitude` / `longitude`). If those fields are omitted, it attempts to extract the pin coordinates from the Google Maps `mapEmbedUrl` already used by the review page. If a restaurant has no coordinate-bearing embed URL, add its real latitude and longitude so it can be pinned. Posts without coordinates remain available in the feed and are reported below the map rather than being placed at an approximate location.
+
+Pins are clustered when locations are close together. Selecting a pin opens the existing full-screen restaurant review; closing it returns to the map centred on that restaurant. Search and cuisine filters only affect the map and do not change the Posts or Saved views.
 
 ## Profile image / counts
 

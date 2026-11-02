@@ -2,10 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
+
     match /posts/{postId} {
       allow read: if true;
       allow write: if false;
+
       match /likes/{userId} {
+        // The website publicly displays like totals and the current visitor's like state.
         allow read: if true;
         allow create: if signedIn() && request.auth.uid == userId
           && request.resource.data.keys().hasOnly(['createdAt'])
@@ -13,7 +16,9 @@ service cloud.firestore {
         allow delete: if signedIn() && request.auth.uid == userId;
         allow update: if false;
       }
+
       match /comments/{commentId} {
+        // Comments are public on restaurant posts.
         allow read: if true;
         allow create: if signedIn()
           && request.resource.data.keys().hasOnly(['uid','author','text','createdAt'])

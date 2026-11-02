@@ -4,7 +4,7 @@
 
   // Paste your CARTO Basemaps key between the quotes below.
   // This browser-side key is visible in the deployed site; restrict it to your website in CARTO.
-  const CARTO_API_KEY = 'PASTE_YOUR_CARTO_API_KEY_HERE';
+  const CARTO_API_KEY = 'cb1_50f8_1_3c265ef12f5dafaee297c329';
 
   const content = window.LONDON_TABLE_CONTENT || { posts: [], highlights: [] };
   const posts = Array.isArray(content.posts) ? content.posts : [];

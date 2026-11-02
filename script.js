@@ -46,7 +46,7 @@ posts: [
 tags: ['japanese', 'date-night'],
 
     // POST DATE (YYYY-MM-DD)
-    date: '2026-25-10',
+    date: '2026-10-25',
 
     // RESTAURANT WEBSITE
     websiteUrl: 'https://www.losmochis.co.uk/home',
@@ -67,11 +67,8 @@ tags: ['japanese', 'date-night'],
       {
         url: 'https://ik.imagekit.io/53bnrahwc/C9782AC3-9343-4A32-BBE7-53E82AA9260F_4_5005_c.jpeg',
         alt: 'The Menu'
-      },
-      {
-        url: 'https://ik.imagekit.io/53bnrahwc/IMG_8227.jpg',
-        alt: 'Receipt showing the total price'
       }
+     
     ]
   }
 ]
@@ -94,7 +91,7 @@ tags: ['japanese', 'date-night'],
   let likeRefreshToken = 0;
   let lastRefreshAt = 0;
   let likeCountError = false;
-  const labels = ['RESTAURANT', 'FOOD', 'RECEIPT'];
+  const labels = ['RESTAURANT', 'FOOD', 'MENU'];
   const savedKey = 'the-london-table-bookmarks-v1';
   let activeTab = 'posts';
   let activeFilter = 'all';
@@ -278,7 +275,7 @@ tags: ['japanese', 'date-night'],
     $('save-button').setAttribute('aria-pressed', String(bookmarks.has(post.id)));
     $('save-button').setAttribute('aria-label', bookmarks.has(post.id) ? 'Remove saved restaurant' : 'Save restaurant');
     const caption = $('post-caption'); caption.replaceChildren();
-    caption.append(make('div','caption-kicker','LONDON RESTAURANT REVIEW · ' + shortId(post)));
+   
     const title = make('div','caption-title-line');
     const h2 = make('h2','',post.name); const rating = make('span','rating-chip');
     rating.append(make('span','','★'),document.createTextNode(`${post.rating.toFixed(1)} / 5`)); title.append(h2,rating); caption.append(title);
@@ -288,9 +285,9 @@ tags: ['japanese', 'date-night'],
     for (const [key,value,glyph] of detailRows) { const cell = make('div','info-cell'); cell.append(make('label','',key)); const span = make('span'); if (glyph) span.innerHTML = icon(glyph); span.append(document.createTextNode(value)); cell.append(span); strip.append(cell); }
     caption.append(strip,make('strong','review-label','My review'),make('p','review-copy',post.description));
     const site = goodUrl(post.websiteUrl);
-    if(site){const link=make('a','post-visit-link','Visit restaurant website ↗');link.href=site;link.target='_blank';link.rel='noopener noreferrer';caption.append(link);}
+    if(site){const link=make('a','post-visit-link','Restaurant website');link.href=site;link.target='_blank';link.rel='noopener noreferrer';caption.append(link);}
     const mapRow = make('div','map-label-row');mapRow.append(make('strong','','Find it in London'));
-    const mapLink = make('a','', 'Open Google Maps ↗');mapLink.href=mapSearch(post);mapLink.target='_blank';mapLink.rel='noopener noreferrer';mapRow.append(mapLink);caption.append(mapRow);
+    const mapLink = make('a','', 'Open in Google Maps');mapLink.href=mapSearch(post);mapLink.target='_blank';mapLink.rel='noopener noreferrer';mapRow.append(mapLink);caption.append(mapRow);
     const mapFrame = make('div','post-map-frame'); const map = make('iframe');map.loading='lazy';map.title=`Map of ${post.location}`;map.referrerPolicy='no-referrer-when-downgrade';map.src=mapEmbed(post);mapFrame.append(map);caption.append(mapFrame);
     $('post-scroll').scrollTop = 0;
     currentLikes = []; currentComments = []; updateSocial();

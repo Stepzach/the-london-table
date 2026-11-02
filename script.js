@@ -1,6 +1,6 @@
 /* THE LONDON TABLE — published restaurant reviews. See README for adding a real review. */
 const CONTENT = {
- profile:{username:'zachary.stephens',displayName:'London Restaurants',avatarUrl:'https://avatars.githubusercontent.com/u/114777610?v=4'},
+ profile:{username:'zachary.stephens',displayName:'London Restaurants',avatarUrl:'https://ik.imagekit.io/53bnrahwc/676B5659-B262-434D-B7FD-0424164BEDD2_1_105_c.jpeg'},
  highlights:[{id:'all',name:'All spots',icon:'✳',color:'#f4e6d8'},
              
              

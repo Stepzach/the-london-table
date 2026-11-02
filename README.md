@@ -65,6 +65,14 @@ Use your **real** restaurant details and real photo URLs before committing. The 
 
 ## Restaurant map
 
+Before publishing the map, open `map.js` and paste your CARTO Basemaps API key into the `CARTO_API_KEY` constant near the top:
+
+```js
+const CARTO_API_KEY = 'PASTE_YOUR_CARTO_API_KEY_HERE';
+```
+
+Replace the placeholder text inside the quotes with your key. The key is sent to CARTO with each tile request as the `?key=` query parameter. It is a browser-side key and will be visible to visitors in the deployed JavaScript, so restrict it in your CARTO dashboard to your website's domain (for example, `stepzach.github.io`) where key restrictions are available. Do not put a private server credential here.
+
 The third navigation section is an interactive London map powered by the same `CONTENT.posts` array as the feed. There is no second restaurant list to maintain: a newly published post appears on the map automatically after the updated site is deployed.
 
 The map reads coordinates from `coordinates: { lat, lng }` (or `latitude` / `longitude`). If those fields are omitted, it attempts to extract the pin coordinates from the Google Maps `mapEmbedUrl` already used by the review page. If a restaurant has no coordinate-bearing embed URL, add its real latitude and longitude so it can be pinned. Posts without coordinates remain available in the feed and are reported below the map rather than being placed at an approximate location.

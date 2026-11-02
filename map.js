@@ -2,6 +2,10 @@
 (() => {
   'use strict';
 
+  // Paste your CARTO Basemaps key between the quotes below.
+  // This browser-side key is visible in the deployed site; restrict it to your website in CARTO.
+  const CARTO_API_KEY = 'PASTE_YOUR_CARTO_API_KEY_HERE';
+
   const content = window.LONDON_TABLE_CONTENT || { posts: [], highlights: [] };
   const posts = Array.isArray(content.posts) ? content.posts : [];
   const $ = (id) => document.getElementById(id);
@@ -147,7 +151,10 @@
       preferCanvas: true
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    const cartoTileUrl = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key='
+      + encodeURIComponent(CARTO_API_KEY.trim());
+
+    L.tileLayer(cartoTileUrl, {
       subdomains: 'abcd',
       maxZoom: 20,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
